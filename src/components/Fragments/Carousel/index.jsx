@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getMovieList } from "../../../services/api";
 
 const Carousel = ({ popularMovie }) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -18,13 +17,15 @@ const Carousel = ({ popularMovie }) => {
 
   return (
     <Slider {...settings}>
-      {popularMovie.map((movie, index) => (
-        <div key={index}>
+      {popularMovie.map((movie) => (
+        <div className="relative" key={movie.id}>
           <img
-            className="w-full object-cover h-96"
-            src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+            className="object-cover w-full h-96"
+            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={movie.title}
           />
+          <h1 className="absolute t-10">{movie.title}</h1>
+          <h1>{movie.overview}</h1>
         </div>
       ))}
     </Slider>
