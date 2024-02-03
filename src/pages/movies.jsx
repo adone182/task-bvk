@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import CardMovieList from "../components/Layouts/CardMovieList";
+import { useContext, useEffect, useState } from "react";
 import { getMovieList, searchMovie } from "../services/api";
 import Navbar from "../components/Elements/Navbar";
 import Carousel from "../components/Fragments/Carousel";
+import CardMovieList from "../components/Fragments/CardMovieList";
+import { WatchListContext } from "../contexts/WatchListContext";
 
 const MoviesPage = () => {
+  const { watchList, addToWatchList, removeFromWatchList } =
+    useContext(WatchListContext);
   const [popularMovie, setPopularMovie] = useState([]);
   const [query, setQuery] = useState("");
 
@@ -49,7 +52,12 @@ const MoviesPage = () => {
 
       <div className="w-full md:px-32 px-10 md:py-8 py-5">
         <h1 className="text-blue-600 font-bold my-5 text-3xl">Popular Movie</h1>
-        <CardMovieList popularMovie={popularMovie} />
+        <CardMovieList
+          popularMovie={popularMovie}
+          watchList={watchList}
+          addToWatchList={addToWatchList}
+          removeFromWatchList={removeFromWatchList}
+        />
       </div>
     </>
   );
