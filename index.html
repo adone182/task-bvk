@@ -16,6 +16,13 @@
             .register("/src/utils/service-worker.js")
             .then((registration) => {
               console.log("ServiceWorker registered: ", registration);
+              window.addEventListener("online", () => {
+                alert("Hore..kamu online lagi.");
+              });
+
+              window.addEventListener("offline", () => {
+                alert("Ooppsss..kamu sedang offline.");
+              });
             })
             .catch((error) => {
               console.log("ServiceWorker registration failed: ", error);

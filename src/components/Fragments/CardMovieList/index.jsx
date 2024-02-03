@@ -9,9 +9,7 @@ const CardMovieList = ({
   removeFromWatchList,
 }) => {
   const handleAddToWatchList = (movie) => {
-    const isMovieInWatchList = watchList.some((item) => item.id === movie.id);
-
-    if (isMovieInWatchList) {
+    if (watchList.some((item) => item.id === movie.id)) {
       removeFromWatchList(movie.id);
       localStorage.setItem(
         "watchList",
@@ -45,7 +43,7 @@ const CardMovieList = ({
     }
   };
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
+    <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-8">
       {popularMovie.map((movie) => (
         <div
           className="max-w-xs overflow-hidden shadow-xl rounded-lg"
@@ -72,7 +70,9 @@ const CardMovieList = ({
               classname="text-blue-500 border border-blue-500 hover:bg-blue-700 hover:text-white"
               onClick={() => handleAddToWatchList(movie)}
             >
-              Add Watched List
+              {watchList.some((item) => item.id === movie.id)
+                ? "Remove Watchlist"
+                : "Add Watchlist"}
             </Button>
           </div>
         </div>

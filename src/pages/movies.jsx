@@ -30,7 +30,7 @@ const MoviesPage = () => {
     <>
       <Navbar />
       {/* <Carousel popularMovie={popularMovie} /> */}
-      <div className="px-32 flex justify-center items-center mt-8">
+      <div className="md:px-32 px-4 flex justify-center items-center mt-8">
         <div className="relative w-full">
           <input
             className="border border-gray-300 bg-white h-12 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full"
@@ -50,7 +50,7 @@ const MoviesPage = () => {
         </div>
       </div>
 
-      <div className="w-full md:px-32 px-10 md:py-8 py-5">
+      <div className="w-full lg:px-32 px-10 md:py-8 py-5">
         <h1 className="text-blue-600 font-bold my-5 text-3xl">Popular Movie</h1>
         <CardMovieList
           popularMovie={popularMovie}

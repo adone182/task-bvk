@@ -19,44 +19,46 @@ self.addEventListener("fetch", (event) => {
       return response || fetch(event.request);
     })
   );
+
+  if (event.request.method === "POST") {
+    event.respondWith(
+      fetch(event.request.clone()).then((response) => {
+        if (response.ok) {
+          return response
+            .clone()
+            .json()
+            .then((data) => {
+              localStorage.setItem("watchList", JSON.stringify(data));
+              return response;
+            });
+        }
+      })
+    );
+  }
 });
 
 self.addEventListener("online", (event) => {
   console.log("Aplikasi kembali online");
-  const pendingData = localStorage.getItem("pendingData");
-  if (pendingData) {
-    fetch("url-server", {
-      method: "POST",
-      body: pendingData,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        localStorage.removeItem("pendingData");
+  if (navigator.onLine) {
+    const watchList = localStorage.getItem("watchList");
+    if (watchList) {
+      fetch("url-server", {
+        method: "POST",
+        body: watchList,
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error("Error syncing data:", error);
-      });
+        .then((response) => {
+          localStorage.removeItem("watchList");
+        })
+        .catch((error) => {
+          console.error("Error syncing data:", error);
+        });
+    }
   }
 });
 
 self.addEventListener("offline", (event) => {
   console.log("Aplikasi berada dalam mode offline");
-});
-
-self.addEventListener("fetch", function (event) {
-  event.respondWith(
-    fetch(event.request).then(function (response) {
-      if (event.request.method === "POST") {
-        response
-          .clone()
-          .json()
-          .then(function (data) {
-            localStorage.setItem("pendingData", JSON.stringify(data));
-          });
-      }
-      return response;
-    })
-  );
 });

@@ -16,12 +16,12 @@ const WatchListPage = () => {
       <Navbar />
       <div className="md:px-32 px-5 py-10 flex flex-col justify-center gap-8">
         <h1 className="font-semibold text-3xl text-blue-500 py-10">
-          Watch List
+          My Watch List Movie
         </h1>
 
         {watchList.map((movie) => (
           <div
-            className="border border-blue-500 rounded md:w-3/4 w-full flex flex-row gap-8 p-2"
+            className="border border-blue-500 rounded lg:w-3/4 md:w-full flex flex-row gap-8 p-2"
             key={movie.id}
           >
             <img
