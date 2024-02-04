@@ -1,12 +1,14 @@
 const Button = ({
+  type = "button",
   children,
   onClick,
-  classname = "text-white border border-white py-1 hover:bg-blue-700",
+  classname = "px-4 bg-transparent text-white border border-white py-1 hover:bg-blue-700",
 }) => {
   return (
     <button
+      type={type}
       onClick={onClick}
-      className={`${classname} bg-transparent font-medium px-4`}
+      className={`${classname} font-medium`}
     >
       {children}
     </button>
