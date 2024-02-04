@@ -21,7 +21,7 @@ const CommentSection = ({ movieId }) => {
   };
 
   return (
-    <div className="w-full lg:px-72 px-4 py-5">
+    <div className="w-full lg:px-72 px-4 py-20">
       <div className="comment-section">
         <h2 className="text-2xl font-semibold mb-4">Comments</h2>
         <div className="comments-list space-y-4">

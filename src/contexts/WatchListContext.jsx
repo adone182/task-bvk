@@ -99,7 +99,7 @@ export function useWatchList() {
 
 export const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState([]);
-  const [rating, setRating] = useState([]);
+  const [rating, setRating] = useState({});
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -123,11 +123,19 @@ export const WatchListProvider = ({ children }) => {
   };
 
   const addRate = (movieId, selectedRating) => {
-    setRating({ ...rating, [movieId]: selectedRating });
-    localStorage.setItem(
-      `movieRating`,
-      JSON.stringify({ ...rating, [movieId]: selectedRating })
+    let updatedRating = JSON.parse(localStorage.getItem("movieRating")) || [];
+    const existingIndex = updatedRating.findIndex(
+      (item) => item.id === movieId
     );
+
+    if (existingIndex !== -1) {
+      updatedRating[existingIndex].rate = selectedRating;
+    } else {
+      updatedRating.push({ id: movieId, rate: selectedRating });
+    }
+
+    setRating(updatedRating);
+    localStorage.setItem("movieRating", JSON.stringify(updatedRating));
   };
 
   const addComment = (movieId, newComment) => {

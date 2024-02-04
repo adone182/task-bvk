@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { getMovieList, searchMovie } from "../services/api";
-import Navbar from "../components/Elements/Navbar";
 import Carousel from "../components/Fragments/Carousel";
 import CardMovieList from "../components/Fragments/CardMovieList";
 import { WatchListContext } from "../contexts/WatchListContext";
 import Search from "../components/Elements/Search";
+import MovieLayouts from "../components/Layouts/MovieLayouts";
 
 const MoviesPage = () => {
   const { watchList, addToWatchList, removeFromWatchList } =
@@ -27,18 +27,19 @@ const MoviesPage = () => {
   };
 
   return (
-    <>
-      <Navbar />
-      <Carousel popularMovie={popularMovie} />
-      <Search onSearch={handleSearch} />
-      <CardMovieList
-        popularMovie={popularMovie}
-        watchList={watchList}
-        addToWatchList={addToWatchList}
-        removeFromWatchList={removeFromWatchList}
-        title="Popular Movie"
-      />
-    </>
+    <Fragment>
+      <MovieLayouts>
+        <Carousel popularMovie={popularMovie} />
+        <Search onSearch={handleSearch} />
+        <CardMovieList
+          popularMovie={popularMovie}
+          watchList={watchList}
+          addToWatchList={addToWatchList}
+          removeFromWatchList={removeFromWatchList}
+          title="Popular Movie"
+        />
+      </MovieLayouts>
+    </Fragment>
   );
 };
 

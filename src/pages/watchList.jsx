@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navbar from "../components/Elements/Navbar";
 import CardWatchList from "../components/Fragments/CardWatchList";
+import MovieLayouts from "../components/Layouts/MovieLayouts";
 
 const WatchListPage = () => {
   const [watchList, setWatchList] = useState([]);
@@ -19,8 +19,9 @@ const WatchListPage = () => {
 
   return (
     <Fragment>
-      <Navbar />
-      <CardWatchList watchList={watchList} />
+      <MovieLayouts>
+        <CardWatchList watchList={watchList} title="My Watchlist Movie" />
+      </MovieLayouts>
     </Fragment>
   );
 };
