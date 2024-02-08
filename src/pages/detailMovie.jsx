@@ -54,7 +54,6 @@ const DetailMoviePage = () => {
           addToWatchList={addToWatchList}
           removeFromWatchList={removeFromWatchList}
           rating={rating}
-          setRating={setRating}
           showRatingModal={showRatingModal}
           setShowRatingModal={setShowRatingModal}
           selectedMovieId={selectedMovieId}

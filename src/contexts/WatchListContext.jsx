@@ -1,94 +1,3 @@
-// import React, { createContext, useContext, useEffect, useState } from "react";
-
-// export const WatchListContext = createContext();
-
-// export function useWatchList() {
-//   return useContext(WatchListContext);
-// }
-
-// export const WatchListProvider = ({ children }) => {
-//   const [watchList, setWatchList] = useState([]);
-
-//   useEffect(() => {
-//     const storedWatchList = localStorage.getItem("watchList");
-//     if (storedWatchList) {
-//       setWatchList(JSON.parse(storedWatchList));
-//     }
-//   }, []);
-
-//   const addToWatchList = (movie) => {
-//     setWatchList([...watchList, movie]);
-//   };
-
-//   const removeFromWatchList = (movieId) => {
-//     setWatchList(watchList.filter((movie) => movie.id !== movieId));
-//   };
-
-//   return (
-//     <WatchListContext.Provider
-//       value={{
-//         watchList,
-//         addToWatchList,
-//         removeFromWatchList,
-//       }}
-//     >
-//       {children}
-//     </WatchListContext.Provider>
-//   );
-// };
-
-// WatchListContext.js;
-// import React, { createContext, useContext, useEffect, useState } from "react";
-
-// export const WatchListContext = createContext();
-
-// export function useWatchList() {
-//   return useContext(WatchListContext);
-// }
-
-// export const WatchListProvider = ({ children }) => {
-//   const [watchList, setWatchList] = useState([]);
-//   const [rating, setRating] = useState([]);
-
-//   useEffect(() => {
-//     const storedWatchList = localStorage.getItem("watchList");
-//     if (storedWatchList) {
-//       setWatchList(JSON.parse(storedWatchList));
-//     }
-//   }, []);
-
-//   const addToWatchList = (movie) => {
-//     setWatchList([...watchList, movie]);
-//   };
-
-//   const removeFromWatchList = (movieId) => {
-//     setWatchList(watchList.filter((movie) => movie.id !== movieId));
-//   };
-
-//   const addRate = (movieId, selectedRating) => {
-//     setRating({ ...rating, [movieId]: selectedRating });
-//     localStorage.setItem(
-//       `movieRating`,
-//       JSON.stringify({ ...rating, [movieId]: selectedRating })
-//     );
-//   };
-
-//   return (
-//     <WatchListContext.Provider
-//       value={{
-//         watchList,
-//         addToWatchList,
-//         addRate,
-//         removeFromWatchList,
-//         rating,
-//         setRating,
-//       }}
-//     >
-//       {children}
-//     </WatchListContext.Provider>
-//   );
-// };
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const WatchListContext = createContext();
@@ -99,13 +8,18 @@ export function useWatchList() {
 
 export const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState([]);
-  const [rating, setRating] = useState({});
+  const [rating, setRating] = useState([]);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const storedWatchList = localStorage.getItem("watchList");
     if (storedWatchList) {
       setWatchList(JSON.parse(storedWatchList));
+    }
+
+    const storedRating = localStorage.getItem("movieRating");
+    if (storedRating) {
+      setRating(JSON.parse(storedRating));
     }
 
     const storedComments = localStorage.getItem("movieComments");
@@ -165,3 +79,30 @@ export const WatchListProvider = ({ children }) => {
     </WatchListContext.Provider>
   );
 };
+// import { useReducer, createContext, useContext } from "react";
+
+// export const WatchListContext = createContext();
+
+// export const useWatchList = () => {
+//   return useContext(WatchListContext);
+// };
+
+// const initialState = {};
+
+// export const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "ACTION_TYPE":
+//       return;
+//     default:
+//       return state;
+//   }
+// };
+
+// export const WatchListProvider = ({ children }) => {
+//   const [state, dispatch] = useReducer(reducer, initialState);
+//   return (
+//     <WatchListContext.Provider value={{ initialState }}>
+//       {children}
+//     </WatchListContext.Provider>
+//   );
+// };

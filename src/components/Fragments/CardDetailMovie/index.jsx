@@ -5,6 +5,7 @@ import { convertDateFormat } from "../../../services/convertDateFormat";
 import { convertDurationToMinutes } from "../../../services/convertDurationToMinutes";
 
 const CardDetailMovie = ({
+  addRate,
   detailMovie,
   trailerUrl,
   showTrailer,
@@ -12,13 +13,18 @@ const CardDetailMovie = ({
   addToWatchList,
   removeFromWatchList,
   rating,
-  setRating,
   showRatingModal,
   setShowRatingModal,
   selectedMovieId,
   setSelectedMovieId,
   watchList,
 }) => {
+  const userRating =
+    (rating && rating.find((item) => item.id === detailMovie.id)?.rate) ||
+    "gak ada rating";
+
+  console.log(rating);
+  // const rate = rating[0].rate;
   const tampilkanBintang = (nilai) => {
     let bintang = "";
     for (let i = 0; i < nilai; i++) {
@@ -27,7 +33,8 @@ const CardDetailMovie = ({
     return bintang;
   };
 
-  const getRate = tampilkanBintang(rating);
+  const getRate = tampilkanBintang(userRating);
+  // console.log(getRate);
 
   const handlePlayTrailer = () => {
     setShowTrailer((prevState) => !prevState);
